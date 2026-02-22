@@ -1,0 +1,26 @@
+[
+  {
+    "price": 12680,
+    "carrier": "pobeda",
+    "segments": [
+      { "origin": "SVO", "destination": "LED", "date": "2025-02-10T09:00:00.000Z", "duration": 100, "stops": [] },
+      { "origin": "LED", "destination": "SVO", "date": "2025-02-15T14:00:00.000Z", "duration": 110, "stops": ["KZN"] }
+    ]
+  },
+  {
+    "price": 21500,
+    "carrier": "redwings",
+    "segments": [
+      { "origin": "SVO", "destination": "LED", "date": "2025-02-10T07:30:00.000Z", "duration": 90, "stops": [] },
+      { "origin": "LED", "destination": "SVO", "date": "2025-02-15T15:00:00.000Z", "duration": 95, "stops": [] }
+    ]
+  },
+  {
+    "price": 23995,
+    "carrier": "s7",
+    "segments": [
+      { "origin": "SVO", "destination": "LED", "date": "2025-02-10T05:50:00.000Z", "duration": 160, "stops": ["KZN", "UFA"] },
+      { "origin": "LED", "destination": "SVO", "date": "2025-02-15T18:10:00.000Z", "duration": 170, "stops": ["UFA"] }
+    ]
+  }
+]
