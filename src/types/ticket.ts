@@ -13,4 +13,4 @@ export type Ticket = {
   segments: Segment[];
 };
 
-export type SortType = "cheap" | "fast";
+export type SortType = "cheap" | "fast" | "optimal";

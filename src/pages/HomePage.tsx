@@ -18,17 +18,47 @@ export default function HomePage() {
   }, [dispatch]);
 
   return (
-    <div style={{ padding: 20, fontFamily: "system-ui" }}>
-      <h1>Поиск авиабилетов</h1>
+    <div className="page">
+      <div className="header">
+        <div className="logo">✈️</div>
+        <h1 className="title">Поиск авиабилетов</h1>
+      </div>
 
-      <StopsFilter />
-      <SortTabs />
+      <div className="layout">
+        <aside className="sidebar">
+          <StopsFilter />
 
-      {loading && <p>Загрузка...</p>}
-      {error && <p style={{ color: "crimson" }}>{error}</p>}
+          {/* Заглушка "Компании" (как в макете).
+              Если хочешь — потом добавим настоящий фильтр по компаниям */}
+          <div className="panel">
+            <div className="panelTitle">Компании</div>
+            <div className="checkList">
+              <label className="check">
+                <input type="radio" name="c" defaultChecked />
+                Победа
+              </label>
+              <label className="check">
+                <input type="radio" name="c" />
+                Red Wings
+              </label>
+              <label className="check">
+                <input type="radio" name="c" />
+                S7 Airlines
+              </label>
+            </div>
+          </div>
+        </aside>
 
-      <TicketList />
-      <LoadMoreButton />
+        <main className="main">
+          <SortTabs />
+
+          {loading && <div className="hint">Загрузка...</div>}
+          {error && <div className="error">{error}</div>}
+
+          <TicketList />
+          <LoadMoreButton />
+        </main>
+      </div>
     </div>
   );
 }

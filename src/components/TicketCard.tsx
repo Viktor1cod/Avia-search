@@ -4,20 +4,43 @@ function fmtPrice(p: number) {
   return new Intl.NumberFormat("ru-RU").format(p) + " ₽";
 }
 
+function fmtDuration(min: number) {
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return `${h} ч ${m} мин`;
+}
+
 export default function TicketCard({ ticket }: { ticket: Ticket }) {
-  const stopsCount = ticket.segments[0]?.stops.length ?? 0;
-  const duration = ticket.segments[0]?.duration ?? 0;
+  const seg = ticket.segments[0];
+  const route = seg ? `${seg.origin} - ${seg.destination}` : "—";
+  const duration = seg?.duration ?? 0;
+  const stopsCount = seg?.stops.length ?? 0;
 
   return (
-    <div style={{ padding: 12, border: "1px solid #ddd", borderRadius: 10 }}>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <b>{fmtPrice(ticket.price)}</b>
-        <span>{ticket.carrier}</span>
+    <article className="card">
+      <div className="cardTop">
+        <div className="price">{fmtPrice(ticket.price)}</div>
+        <div className="carrier">{ticket.carrier}</div>
       </div>
 
-      <div style={{ marginTop: 6, fontSize: 14, opacity: 0.8 }}>
-        В пути: {duration} мин • Пересадок: {stopsCount}
+      <div className="cardGrid">
+        <div>
+          <div className="metaLabel">{route}</div>
+          <div className="metaValue">12:00 - 16:30</div>
+        </div>
+
+        <div>
+          <div className="metaLabel">В пути</div>
+          <div className="metaValue">{fmtDuration(duration)}</div>
+        </div>
+
+        <div>
+          <div className="metaLabel">Пересадки</div>
+          <div className="metaValue">
+            {stopsCount === 0 ? "Без пересадок" : `${stopsCount} пересадка(и)`}
+          </div>
+        </div>
       </div>
-    </div>
+    </article>
   );
 }

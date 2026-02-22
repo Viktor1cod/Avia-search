@@ -10,7 +10,7 @@ export default function TicketList() {
 
   let list = [...tickets];
 
-  // фильтр по пересадкам (смотрим по 1-му сегменту, максимально просто)
+  // фильтр по пересадкам
   if (stops.length > 0) {
     list = list.filter((t) => stops.includes(t.segments[0]?.stops.length ?? 0));
   }
@@ -18,16 +18,24 @@ export default function TicketList() {
   // сортировка
   if (sort === "cheap") {
     list.sort((a, b) => a.price - b.price);
-  } else {
+  } else if (sort === "fast") {
     list.sort((a, b) => (a.segments[0]?.duration ?? 0) - (b.segments[0]?.duration ?? 0));
+  } else if (sort === "optimal") {
+    list.sort((a, b) => {
+      const scoreA = a.price + (a.segments[0]?.duration ?? 0) * 5;
+      const scoreB = b.price + (b.segments[0]?.duration ?? 0) * 5;
+      return scoreA - scoreB;
+    });
   }
 
   const visibleList = list.slice(0, visible);
 
-  if (visibleList.length === 0) return <p>Ничего не найдено</p>;
+  if (visibleList.length === 0) {
+    return <div className="hint">Ничего не найдено</div>;
+  }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+    <div className="list">
       {visibleList.map((t) => (
         <TicketCard key={t.id} ticket={t} />
       ))}

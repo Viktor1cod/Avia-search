@@ -13,12 +13,26 @@ export default function SortTabs() {
   };
 
   return (
-    <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-      <button onClick={() => onSet("cheap")} style={{ fontWeight: sort === "cheap" ? 700 : 400 }}>
+    <div className="tabs">
+      <button
+        className={`tab ${sort === "cheap" ? "active" : ""}`}
+        onClick={() => onSet("cheap")}
+      >
         Самый дешевый
       </button>
-      <button onClick={() => onSet("fast")} style={{ fontWeight: sort === "fast" ? 700 : 400 }}>
+
+      <button
+        className={`tab ${sort === "fast" ? "active" : ""}`}
+        onClick={() => onSet("fast")}
+      >
         Самый быстрый
+      </button>
+
+      <button
+        className={`tab ${sort === "optimal" ? "active" : ""}`}
+        onClick={() => onSet("optimal")}
+      >
+        Самый оптимальный
       </button>
     </div>
   );

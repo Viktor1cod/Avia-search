@@ -12,17 +12,20 @@ export default function StopsFilter() {
   };
 
   return (
-    <div style={{ marginBottom: 12 }}>
-      <b>Количество пересадок:</b>
-      <div style={{ display: "flex", gap: 12, marginTop: 8, flexWrap: "wrap" }}>
+    <div className="panel">
+      <div className="panelTitle">Количество пересадок</div>
+
+      <div className="checkList">
         {[0, 1, 2, 3].map((n) => (
-          <label key={n} style={{ display: "flex", gap: 6, alignItems: "center" }}>
+          <label key={n} className="check">
             <input
               type="checkbox"
               checked={stops.includes(n)}
               onChange={() => onToggle(n)}
             />
-            <span>{n === 0 ? "Без пересадок" : `${n}`}</span>
+            <span>
+              {n === 0 ? "Без пересадок" : n === 1 ? "1 пересадка" : `${n} пересадки`}
+            </span>
           </label>
         ))}
       </div>
