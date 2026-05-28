@@ -72,3 +72,4 @@ export default defineConfig([
 ])
 ```
 # Avia-search
+![CI](https://github.com/Viktor1cod/Avia-search/actions/workflows/ci.yml/badge.svg)
