@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: avia-search
-        image: viktor1cod/avia-search:ce0d291e6bf9613be41a649c39bbc67fd1412b43
+        image: viktor1cod/avia-search:e56ec9dc9c26a96978c8735854f1149d0f104561
         ports:
         - containerPort: 80
