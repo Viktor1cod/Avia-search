@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: avia-search
+  namespace: default
+spec:
+  selector:
+    app: avia-search
+  ports:
+  - port: 80
+    targetPort: 80
+  type: NodePort

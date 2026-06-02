@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: avia-search
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: avia-search
+  template:
+    metadata:
+      labels:
+        app: avia-search
+    spec:
+      containers:
+      - name: avia-search
+        image: viktor1cod/avia-search:latest
+        ports:
+        - containerPort: 80
