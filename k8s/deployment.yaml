@@ -18,3 +18,15 @@ spec:
         image: viktor1cod/avia-search:8ae5432fe23407dd55428cbe4a13becfab49f6c5
         ports:
         - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
