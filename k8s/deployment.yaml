@@ -15,9 +15,16 @@ spec:
     spec:
       containers:
       - name: avia-search
-        image: viktor1cod/avia-search:8ae5432fe23407dd55428cbe4a13becfab49f6c5
+        image: viktor1cod/avia-search:latest
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
         readinessProbe:
           httpGet:
             path: /
