@@ -1,9 +1,11 @@
 name: CI
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
 jobs:
   lint-and-build:
     runs-on: ubuntu-latest
@@ -12,28 +14,34 @@ jobs:
         node-version: [20, 22]
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+
       - uses: actions/upload-artifact@v4
         with:
           name: dist-node-${{ matrix.node-version }}
           path: dist/
+
   docker:
     runs-on: ubuntu-latest
     needs: lint-and-build
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
+
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -41,6 +49,7 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/avia-search:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/avia-search:${{ github.sha }}
+
   security:
     runs-on: ubuntu-latest
     needs: docker
@@ -52,10 +61,11 @@ jobs:
           format: table
           exit-code: 1
           severity: CRITICAL,HIGH
-  update-manifest:
+
+    update-manifest:
     runs-on: ubuntu-latest
     needs: docker
-    if: github.ref == 'refs/heads/main'
+    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
